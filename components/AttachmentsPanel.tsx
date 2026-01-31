@@ -1,6 +1,7 @@
 import React from 'react';
 import { Attachment } from '../types';
 import { FileText, Film, Database, Image as ImageIcon, Download } from 'lucide-react';
+import { triggerDownload } from '../utils/actions';
 
 interface Props {
   attachments: Attachment[];
@@ -24,9 +25,13 @@ const AttachmentsPanel: React.FC<Props> = ({ attachments }) => {
       </h3>
       <div className="space-y-3">
         {attachments.map((file, idx) => (
-          <div key={idx} className="flex items-center justify-between p-3 bg-white rounded shadow-sm hover:shadow-md transition-shadow cursor-pointer border border-slate-200">
+          <div 
+            key={idx} 
+            className="flex items-center justify-between p-3 bg-white rounded shadow-sm hover:shadow-md transition-shadow cursor-pointer border border-slate-200 group"
+            onClick={() => triggerDownload(file.name)}
+          >
             <div className="flex items-center space-x-4">
-              <div className="p-2 bg-slate-50 rounded-full">
+              <div className="p-2 bg-slate-50 rounded-full group-hover:bg-slate-100 transition-colors">
                 {getIcon(file.type)}
               </div>
               <div>
@@ -36,7 +41,13 @@ const AttachmentsPanel: React.FC<Props> = ({ attachments }) => {
             </div>
             <div className="flex items-center space-x-4">
                 <span className="text-xs font-mono text-slate-400">{file.size}</span>
-                <button className="text-sm font-semibold text-blue-700 hover:underline">
+                <button 
+                  className="text-sm font-semibold text-blue-700 hover:underline flex items-center"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    triggerDownload(file.name);
+                  }}
+                >
                     Download
                 </button>
             </div>

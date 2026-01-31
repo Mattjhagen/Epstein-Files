@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { REPORT_TITLE, REPORT_SUBTITLE, PUBLISH_DATE, EVIDENCE_DATA, ATTACHMENTS } from './constants';
 import EvidenceTable from './components/EvidenceTable';
 import SectionViewer from './components/SectionViewer';
@@ -6,7 +6,8 @@ import AttachmentsPanel from './components/AttachmentsPanel';
 import Navigation from './components/Navigation';
 import ForensicAssistant from './components/ForensicAssistant';
 import { ReportSection } from './types';
-import { Menu, X, FileText, Globe, Share2 } from 'lucide-react';
+import { Menu, X, FileText, Globe, Share2, Twitter, Facebook, Linkedin, Link as LinkIcon } from 'lucide-react';
+import { triggerDownload, shareReport, openSocialShare } from './utils/actions';
 
 const App: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -213,7 +214,10 @@ const App: React.FC = () => {
              <span className="flex items-center"><Globe size={16} className="mr-2"/> Public Record</span>
              <span className="text-slate-300">|</span>
              <span>{PUBLISH_DATE}</span>
-             <button className="bg-slate-900 text-white px-4 py-2 rounded hover:bg-slate-800 transition-colors">
+             <button 
+                onClick={() => triggerDownload("Forensic_Analysis_Epstein_Release_2026.pdf")}
+                className="bg-slate-900 text-white px-4 py-2 rounded hover:bg-slate-800 transition-colors"
+             >
                 Download PDF
              </button>
           </div>
@@ -276,13 +280,34 @@ const App: React.FC = () => {
              <div className="sticky top-24 bg-white p-4 rounded border border-slate-200 shadow-sm">
                 <h4 className="font-bold text-xs uppercase text-slate-400 mb-4">Share Report</h4>
                 <div className="flex space-x-2">
-                   <button className="p-2 bg-slate-100 rounded hover:bg-slate-200 text-slate-600">
+                   <button 
+                     onClick={() => shareReport(REPORT_TITLE, REPORT_SUBTITLE)}
+                     className="p-2 bg-slate-100 rounded hover:bg-slate-200 text-slate-600 transition-colors"
+                     title="Share via..."
+                   >
                       <Share2 size={16} />
                    </button>
-                   {/* Social mocks */}
-                   <div className="h-8 w-8 bg-blue-600 rounded-full"></div>
-                   <div className="h-8 w-8 bg-sky-500 rounded-full"></div>
-                   <div className="h-8 w-8 bg-slate-800 rounded-full"></div>
+                   <button 
+                     onClick={() => openSocialShare('facebook', REPORT_TITLE)}
+                     className="p-2 bg-blue-600 rounded hover:bg-blue-700 text-white transition-colors"
+                     title="Share on Facebook"
+                   >
+                     <Facebook size={16} />
+                   </button>
+                   <button 
+                     onClick={() => openSocialShare('twitter', REPORT_TITLE)}
+                     className="p-2 bg-sky-500 rounded hover:bg-sky-600 text-white transition-colors"
+                     title="Share on X (Twitter)"
+                   >
+                     <Twitter size={16} />
+                   </button>
+                   <button 
+                     onClick={() => openSocialShare('linkedin', REPORT_TITLE)}
+                     className="p-2 bg-blue-800 rounded hover:bg-blue-900 text-white transition-colors"
+                     title="Share on LinkedIn"
+                   >
+                     <Linkedin size={16} />
+                   </button>
                 </div>
                 <div className="mt-8">
                    <h4 className="font-bold text-xs uppercase text-slate-400 mb-2">Source</h4>
