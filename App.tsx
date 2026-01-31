@@ -4,6 +4,7 @@ import EvidenceTable from './components/EvidenceTable';
 import SectionViewer from './components/SectionViewer';
 import AttachmentsPanel from './components/AttachmentsPanel';
 import Navigation from './components/Navigation';
+import ForensicAssistant from './components/ForensicAssistant';
 import { ReportSection } from './types';
 import { Menu, X, FileText, Globe, Share2 } from 'lucide-react';
 
@@ -293,6 +294,9 @@ const App: React.FC = () => {
           </div>
         </div>
       </main>
+      
+      {/* Forensic AI Assistant */}
+      <ForensicAssistant />
 
       <footer className="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 mt-12">
         <div className="container mx-auto px-4 md:px-8 text-center md:text-left">

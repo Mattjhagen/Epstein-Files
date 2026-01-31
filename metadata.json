@@ -1,5 +1,7 @@
 {
   "name": "Epstein Files Release 2026 - Forensic Analysis",
   "description": "Digital hosting of the forensic analysis of the January 30, 2026 Department of Justice Epstein Files Release.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [
+    "microphone"
+  ]
 }
