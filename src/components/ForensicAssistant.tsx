@@ -59,9 +59,9 @@ const ForensicAssistant: React.FC = () => {
         message: userMsg
       });
       
-      const responseText = result.text;
+      const responseText = result.text; // Access text property directly, do not call as function
 
-      setMessages(prev => [...prev, { role: 'model', text: responseText || 'No response.' }]);
+      setMessages(prev => [...prev, { role: 'model', text: responseText || 'No response generated.' }]);
     } catch (error) {
       console.error('Chat error:', error);
       setMessages(prev => [...prev, { role: 'model', text: 'Error accessing forensic database. Please try again.' }]);
@@ -187,8 +187,11 @@ const ForensicAssistant: React.FC = () => {
          audioContextRef.current.close();
          audioContextRef.current = null;
      }
+     
      if (sessionPromiseRef.current) {
-         sessionPromiseRef.current.then(session => session.close());
+         sessionPromiseRef.current.then(session => {
+             session.close();
+         }).catch(e => console.error("Error closing session", e));
          sessionPromiseRef.current = null;
      }
      
