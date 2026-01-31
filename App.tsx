@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { REPORT_TITLE, REPORT_SUBTITLE, PUBLISH_DATE, EVIDENCE_DATA, ATTACHMENTS } from './constants';
+import { REPORT_TITLE, REPORT_SUBTITLE, PUBLISH_DATE, EVIDENCE_DATA, ATTACHMENTS, FULL_REPORT_TEXT } from './constants';
 import EvidenceTable from './components/EvidenceTable';
 import SectionViewer from './components/SectionViewer';
 import AttachmentsPanel from './components/AttachmentsPanel';
@@ -215,7 +215,7 @@ const App: React.FC = () => {
              <span className="text-slate-300">|</span>
              <span>{PUBLISH_DATE}</span>
              <button 
-                onClick={() => triggerDownload("Forensic_Analysis_Epstein_Release_2026.pdf")}
+                onClick={() => triggerDownload("Forensic_Analysis_Epstein_Release_2026.pdf", FULL_REPORT_TEXT)}
                 className="bg-slate-900 text-white px-4 py-2 rounded hover:bg-slate-800 transition-colors"
              >
                 Download PDF

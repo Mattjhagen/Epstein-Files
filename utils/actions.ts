@@ -1,14 +1,21 @@
 // Utility to simulate file downloads
-export const triggerDownload = (filename: string) => {
-  // Create dummy content based on file extension to simulate a real file
+export const triggerDownload = (filename: string, customContent?: string) => {
+  // Create content: Use custom content if provided, otherwise generate dummy simulation text
   const extension = filename.split('.').pop()?.toLowerCase();
-  let content = `[FORENSIC ARCHIVE SIMULATION]\n\nFile: ${filename}\nDate: ${new Date().toISOString()}\n\nThis is a placeholder file generated for the forensic analysis demo. In a production environment, this would serve the actual binary data from a secure bucket.`;
+  
+  let content = customContent;
+  
+  if (!content) {
+    content = `[FORENSIC ARCHIVE SIMULATION]\n\nFile: ${filename}\nDate: ${new Date().toISOString()}\n\nThis is a placeholder file generated for the forensic analysis demo. In a production environment, this would serve the actual binary data from a secure bucket.`;
+  }
+
   let mimeType = "text/plain";
 
   // Adjust mime type strictly for browser behavior (though content remains text for this demo)
   if (extension === 'csv') mimeType = "text/csv";
-  if (extension === 'pdf') mimeType = "application/pdf";
+  if (extension === 'pdf') mimeType = "application/pdf"; // Note: This will download as a PDF file but contain text in this demo
   if (extension === 'json') mimeType = "application/json";
+  if (extension === 'jpg' || extension === 'png') mimeType = "image/jpeg";
 
   const blob = new Blob([content], { type: mimeType });
   const url = URL.createObjectURL(blob);
