@@ -46,7 +46,8 @@ const ForensicAssistant: React.FC = () => {
 
     try {
       if (!chatClientRef.current) {
-        const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+        // Updated to use GEMINI_API_KEY as per user configuration
+        const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
         chatClientRef.current = ai.chats.create({
           model: 'gemini-3-flash-preview',
           config: {
@@ -74,7 +75,8 @@ const ForensicAssistant: React.FC = () => {
   const startLiveSession = async () => {
     try {
         setIsLiveConnected(true);
-        const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+        // Updated to use GEMINI_API_KEY as per user configuration
+        const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
         
         // Setup Audio Contexts
         const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;

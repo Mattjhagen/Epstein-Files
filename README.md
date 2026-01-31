@@ -38,9 +38,9 @@ A high-fidelity digital archive and forensic analysis platform designed to host 
     You must provide a Google GenAI API Key. This project expects the key to be available in the environment variables.
 
     *   Get a key from [Google AI Studio](https://aistudio.google.com/).
-    *   Set it in your shell or `.env` file (depending on your build setup):
+    *   Set it in your shell or `.env` file (depending on your build setup) as `GEMINI_API_KEY`:
         ```bash
-        export API_KEY="your_actual_api_key_here"
+        export GEMINI_API_KEY="your_actual_api_key_here"
         ```
 
 4.  **Run Development Server:**
