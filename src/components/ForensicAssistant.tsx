@@ -46,10 +46,10 @@ const ForensicAssistant: React.FC = () => {
 
     try {
       if (!chatClientRef.current) {
-        // Updated to use GEMINI_API_KEY as per user configuration
-        const apiKey = process.env.GEMINI_API_KEY;
-
+        // Updated to use VITE_GEMINI_API_KEY as per Vite standard
+        const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
         const ai = new GoogleGenAI({ apiKey });
+
         chatClientRef.current = ai.chats.create({
           model: 'gemini-2.0-flash-exp',
           config: {
@@ -78,9 +78,10 @@ const ForensicAssistant: React.FC = () => {
   const startLiveSession = async () => {
     try {
       setIsLiveConnected(true);
-      // Updated to use GEMINI_API_KEY as per user configuration
-      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+      // Updated to use VITE_GEMINI_API_KEY as per Vite standard
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 
+      const ai = new GoogleGenAI({ apiKey });
       // Setup Audio Contexts
       const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
       audioContextRef.current = new AudioContextClass({ sampleRate: 24000 });
