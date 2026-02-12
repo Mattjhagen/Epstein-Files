@@ -67,7 +67,8 @@ const ForensicAssistant: React.FC = () => {
       setMessages(prev => [...prev, { role: 'model', text: responseText || 'No response generated.' }]);
     } catch (error) {
       console.error('Chat error:', error);
-      setMessages(prev => [...prev, { role: 'model', text: 'Error accessing forensic database. Please try again.' }]);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      setMessages(prev => [...prev, { role: 'model', text: `Error accessing forensic database: ${errorMessage}` }]);
     } finally {
       setIsLoading(false);
     }
@@ -258,8 +259,8 @@ const ForensicAssistant: React.FC = () => {
                     {messages.map((msg, idx) => (
                       <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                         <div className={`max-w-[85%] rounded-lg p-3 text-sm leading-relaxed ${msg.role === 'user'
-                            ? 'bg-blue-600 text-white'
-                            : 'bg-slate-800 text-slate-200 border border-slate-700'
+                          ? 'bg-blue-600 text-white'
+                          : 'bg-slate-800 text-slate-200 border border-slate-700'
                           }`}>
                           {msg.text}
                         </div>
