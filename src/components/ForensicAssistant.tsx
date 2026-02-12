@@ -47,9 +47,12 @@ const ForensicAssistant: React.FC = () => {
     try {
       if (!chatClientRef.current) {
         // Updated to use GEMINI_API_KEY as per user configuration
-        const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+        const apiKey = process.env.GEMINI_API_KEY;
+        console.log("Initializing Gemini Chat with Key:", apiKey ? `${apiKey.substring(0, 4)}...` : "UNDEFINED");
+        
+        const ai = new GoogleGenAI({ apiKey });
         chatClientRef.current = ai.chats.create({
-          model: 'gemini-3-flash-preview',
+          model: 'gemini-2.0-flash-exp',
           config: {
             systemInstruction: AI_SYSTEM_INSTRUCTION
           }
@@ -91,7 +94,7 @@ const ForensicAssistant: React.FC = () => {
 
         // Connect to Gemini Live
         const sessionPromise = ai.live.connect({
-            model: 'gemini-2.5-flash-native-audio-preview-12-2025',
+            model: 'gemini-2.0-flash-exp',
             config: {
                 responseModalities: [Modality.AUDIO],
                 systemInstruction: AI_SYSTEM_INSTRUCTION,
